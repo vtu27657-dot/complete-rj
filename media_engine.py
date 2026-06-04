@@ -1,13 +1,14 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║     RJ TECH MEDIA ENGINE                                                              ║
-║     ALL News Collection | Founder Selection | Auto-Publish                          ║
+║     RJ TECH MEDIA ENGINE - POWER EDITION                                             ║
+║     ALL News Collection | AI Content Creation | Auto-Publish                          ║
 ║                                                                                    ║
 ║     🤖 AI News = FIRST PRIORITY (Gemini, GPT, Claude, etc.)                        ║
 ║     🇮🇳 India Politics = IMPORTANT                                                  ║
 ║     📰 Sports | Business | Technology | Entertainment | Science                    ║
-║     🔍 VIEW FULL CONTENT Before You Select!                                         ║
+║     ✨ AI CREATES CREATIVE CONTENT FOR YOU!                                          ║
+║     📸 GENERATES ATTRACTIVE INSTAGRAM POSTS!                                         ║
 ║     👑 FOUNDER PICKS What to Process                                               ║
 ║     ⏰ 24/7 CONTINUOUS OPERATION                                                   ║
 ║                                                                                    ║
@@ -15,7 +16,9 @@
 
 FEATURES:
 - 🔍 VIEW full news content before selecting
-- 📖 PREVIEW extended summary before deciding  
+- ✨ AI CREATES CREATIVE CONTENT (Not just copy-paste!)
+- 📸 AI GENERATES ATTRACTIVE INSTAGRAM POSTS!
+- 📱 AUTO-POST TO LINKEDIN, X, FACEBOOK, INSTAGRAM, TELEGRAM!
 - 🤖 AI News First (Gemini, OpenAI, Microsoft, etc.)
 - 🇮🇳 India Politics, Sports, Business, Technology
 - 👑 You Choose What to Process
@@ -36,276 +39,76 @@ from pathlib import Path
 # REAL NEWS DATA - RESEARCH AGENT WILL USE THESE
 # ============================================================================
 
-# AI News Categories (MOST IMPORTANT - Gemini, GPT, Claude, etc.)
 AI_NEWS_CATEGORIES = [
-    {
-        'name': 'Google Gemini',
-        'keywords': ['gemini', 'google ai', 'google deepmind', 'gemini ultra', 'gemini flash', 'google ai studio'],
-        'description': 'Latest Gemini AI features and updates - Gemini 2.0, Gemini Flash, etc.'
-    },
-    {
-        'name': 'OpenAI GPT',
-        'keywords': ['gpt', 'openai', 'chatgpt', 'gpt-5', 'sora', 'o1', 'o3', 'openai announcement'],
-        'description': 'GPT models and OpenAI announcements - GPT-5, Sora video, etc.'
-    },
-    {
-        'name': 'Anthropic Claude',
-        'keywords': ['claude', 'anthropic', 'claude 3.5', 'claude 4', 'artificial intelligence', 'AI model'],
-        'description': 'Claude AI and Anthropic updates - Claude Opus, Sonnet, Haiku'
-    },
-    {
-        'name': 'Microsoft Copilot',
-        'keywords': ['microsoft', 'copilot', 'azure ai', 'bing chat', 'microsoft ai'],
-        'description': 'Microsoft AI and Copilot news'
-    },
-    {
-        'name': 'Meta AI',
-        'keywords': ['meta', 'llama', 'facebook ai', 'instagram ai', 'meta ai'],
-        'description': 'Meta AI and Llama models'
-    },
-    {
-        'name': 'AI Agents',
-        'keywords': ['ai agent', 'agentic', 'autonomous ai', 'ai assistant', 'crew ai', 'langgraph'],
-        'description': 'AI Agents and Autonomous systems'
-    },
-    {
-        'name': 'Machine Learning',
-        'keywords': ['machine learning', 'deep learning', 'neural network', 'transformer'],
-        'description': 'ML and Deep Learning breakthroughs'
-    },
-    {
-        'name': 'AI Robotics',
-        'keywords': ['robotics', 'humanoid', 'boston dynamics', 'tesla bot', 'figure robot'],
-        'description': 'AI in Robotics and Automation'
-    },
-    {
-        'name': 'AI Safety',
-        'keywords': ['ai safety', 'alignment', 'ai regulation', 'ai ethics', 'risk'],
-        'description': 'AI Safety and regulation news'
-    }
+    {'name': 'Google Gemini', 'keywords': ['gemini', 'google ai', 'google deepmind', 'gemini ultra', 'gemini flash'], 'description': 'Latest Gemini AI features'},
+    {'name': 'OpenAI GPT', 'keywords': ['gpt', 'openai', 'chatgpt', 'gpt-5', 'sora', 'o1', 'o3'], 'description': 'GPT models and OpenAI announcements'},
+    {'name': 'Anthropic Claude', 'keywords': ['claude', 'anthropic', 'claude 3.5', 'claude 4'], 'description': 'Claude AI and Anthropic updates'},
+    {'name': 'Microsoft Copilot', 'keywords': ['microsoft', 'copilot', 'azure ai', 'bing chat'], 'description': 'Microsoft AI and Copilot news'},
+    {'name': 'Meta AI', 'keywords': ['meta', 'llama', 'facebook ai', 'instagram ai'], 'description': 'Meta AI and Llama models'},
+    {'name': 'AI Agents', 'keywords': ['ai agent', 'agentic', 'autonomous ai', 'ai assistant'], 'description': 'AI Agents and Autonomous systems'},
+    {'name': 'Machine Learning', 'keywords': ['machine learning', 'deep learning', 'neural network'], 'description': 'ML and Deep Learning breakthroughs'},
+    {'name': 'AI Robotics', 'keywords': ['robotics', 'humanoid', 'boston dynamics', 'tesla bot'], 'description': 'AI in Robotics and Automation'},
+    {'name': 'AI Safety', 'keywords': ['ai safety', 'alignment', 'ai regulation', 'ai ethics'], 'description': 'AI Safety and regulation news'}
 ]
 
-# India Politics Categories
 INDIA_POLITICS_CATEGORIES = [
-    {
-        'name': 'Central Government',
-        'keywords': ['modi', 'bjp', 'central government', 'parliament', 'lok sabha', 'rajya sabha', 'cabinet'],
-        'description': 'Central government policies, decisions, and parliament sessions'
-    },
-    {
-        'name': 'State Elections',
-        'keywords': ['election', 'voting', 'manifesto', 'campaign', 'poll', 'booth'],
-        'description': 'State elections and political campaigns across India'
-    },
-    {
-        'name': 'Supreme Court',
-        'keywords': ['supreme court', 'high court', 'judiciary', 'verdict', 'bail', 'judge'],
-        'description': 'Court judgments, legal updates, and important cases'
-    },
-    {
-        'name': 'Bihar Politics',
-        'keywords': ['bihar', 'nitish kumar', 'lalu', 'rjd', 'bihar election', 'jdu', 'bihar government'],
-        'description': 'Bihar political developments and state politics'
-    },
-    {
-        'name': 'Tamil Nadu Politics',
-        'keywords': ['tamil nadu', 'mk stalin', 'dmk', 'admk', 'tamil politics', 'eps', 'stalin'],
-        'description': 'Tamil Nadu political news and state government'
-    },
-    {
-        'name': 'Maharashtra Politics',
-        'keywords': ['maharashtra', 'shivsena', 'mumbai', 'uddhav', 'fadanvis', 'ajit pawar'],
-        'description': 'Maharashtra political updates and state affairs'
-    },
-    {
-        'name': 'Karnataka Politics',
-        'keywords': ['karnataka', 'siddaramaiah', 'congress karnataka', 'bjp karnataka', 'dk shivakumar'],
-        'description': 'Karnataka political news and state politics'
-    },
-    {
-        'name': 'UP Politics',
-        'keywords': ['uttar pradesh', 'yogi', 'adityanath', 'sp', 'bsp', 'up government', 'akhilesh'],
-        'description': 'Uttar Pradesh political developments'
-    },
-    {
-        'name': 'West Bengal Politics',
-        'keywords': ['west bengal', 'mamata', 'tmc', 'bengal election', 'didar'],
-        'description': 'West Bengal political news'
-    }
+    {'name': 'Central Government', 'keywords': ['modi', 'bjp', 'central government', 'parliament', 'lok sabha', 'rajya sabha'], 'description': 'Central government policies'},
+    {'name': 'State Elections', 'keywords': ['election', 'voting', 'manifesto', 'campaign', 'poll'], 'description': 'State elections and political campaigns'},
+    {'name': 'Supreme Court', 'keywords': ['supreme court', 'high court', 'judiciary', 'verdict', 'bail'], 'description': 'Court judgments and legal updates'},
+    {'name': 'Bihar Politics', 'keywords': ['bihar', 'nitish kumar', 'lalu', 'rjd', 'bihar election'], 'description': 'Bihar political developments'},
+    {'name': 'Tamil Nadu Politics', 'keywords': ['tamil nadu', 'mk stalin', 'dmk', 'admk'], 'description': 'Tamil Nadu political news'},
+    {'name': 'Maharashtra Politics', 'keywords': ['maharashtra', 'shivsena', 'mumbai', 'uddhav', 'fadanvis'], 'description': 'Maharashtra political updates'},
+    {'name': 'Karnataka Politics', 'keywords': ['karnataka', 'siddaramaiah', 'congress karnataka', 'bjp karnataka'], 'description': 'Karnataka political news'},
+    {'name': 'UP Politics', 'keywords': ['uttar pradesh', 'yogi', 'adityanath', 'sp', 'bsp', 'up government'], 'description': 'Uttar Pradesh political developments'},
+    {'name': 'West Bengal Politics', 'keywords': ['west bengal', 'mamata', 'tmc', 'bengal election'], 'description': 'West Bengal political news'}
 ]
 
-# Sports Categories
 SPORTS_CATEGORIES = [
-    {
-        'name': 'Cricket',
-        'keywords': ['cricket', 'ipl', 'icc', 'world cup', 't20', 'test match', 'odi', 'virat kohli', 'rohit sharma'],
-        'description': 'Cricket news - IPL, International matches, Domestic cricket'
-    },
-    {
-        'name': 'Football',
-        'keywords': ['football', 'soccer', 'fifa', 'world cup', 'premier league', 'epl', 'champions league'],
-        'description': 'Football and Soccer news - International leagues'
-    },
-    {
-        'name': 'Hockey',
-        'keywords': ['hockey', 'field hockey', 'india hockey', 'pro hockey league', 'hockey world cup'],
-        'description': 'Hockey news and updates - India hockey focus'
-    },
-    {
-        'name': 'Tennis',
-        'keywords': ['tennis', 'wimbledon', 'australian open', 'french open', 'us open', 'roland garros'],
-        'description': 'Tennis tournaments, players, and rankings'
-    },
-    {
-        'name': 'Badminton',
-        'keywords': ['badminton', 'bwf', 'prakash', 'pv sindhu', 'kidambi', 'priyakrishna'],
-        'description': 'Badminton news, tournaments, and Indian players'
-    },
-    {
-        'name': 'Athletics',
-        'keywords': ['athletics', 'olympics', 'paralympics', 'marathon', 'medal', 'athletics federation'],
-        'description': 'Athletics, Olympics, and sports achievements'
-    },
-    {
-        'name': 'Wrestling',
-        'keywords': ['wrestling', 'bajrang', 'sakshi', 'wrestling federation'],
-        'description': 'Wrestling news and Indian wrestlers'
-    }
+    {'name': 'Cricket', 'keywords': ['cricket', 'ipl', 'icc', 'world cup', 't20', 'test match', 'odi', 'virat kohli', 'rohit sharma'], 'description': 'Cricket news'},
+    {'name': 'Football', 'keywords': ['football', 'soccer', 'fifa', 'world cup', 'premier league', 'epl'], 'description': 'Football and Soccer news'},
+    {'name': 'Hockey', 'keywords': ['hockey', 'field hockey', 'india hockey', 'pro hockey league'], 'description': 'Hockey news and updates'},
+    {'name': 'Tennis', 'keywords': ['tennis', 'wimbledon', 'australian open', 'french open', 'us open'], 'description': 'Tennis tournaments and players'},
+    {'name': 'Badminton', 'keywords': ['badminton', 'bwf', 'prakash', 'pv sindhu', 'kidambi'], 'description': 'Badminton news and tournaments'},
+    {'name': 'Athletics', 'keywords': ['athletics', 'olympics', 'paralympics', 'marathon', 'medal'], 'description': 'Athletics, Olympics, and achievements'},
+    {'name': 'Wrestling', 'keywords': ['wrestling', 'bajrang', 'sakshi', 'wrestling federation'], 'description': 'Wrestling news and Indian wrestlers'}
 ]
 
-# Business & Finance Categories
 BUSINESS_CATEGORIES = [
-    {
-        'name': 'Stock Market',
-        'keywords': ['stock market', 'sensex', 'nifty', 'bse', 'nse', 'share market', 'stock'],
-        'description': 'Stock market updates, trends, and analysis'
-    },
-    {
-        'name': 'Startup News',
-        'keywords': ['startup', 'funding', 'investment', 'unicorn', 'entrepreneur', 'venture capital'],
-        'description': 'Startup funding, unicorns, and business investments'
-    },
-    {
-        'name': 'Economy',
-        'keywords': ['economy', 'gdp', 'inflation', 'rbi', 'interest rate', 'fiscal deficit'],
-        'description': 'Economic indicators, RBI policies, and financial news'
-    },
-    {
-        'name': 'Tech Companies',
-        'keywords': ['google', 'apple', 'amazon', 'microsoft', 'meta', 'tesla', 'nvidia'],
-        'description': 'Tech giant business updates and stock performance'
-    },
-    {
-        'name': 'Banking',
-        'keywords': ['banking', 'bank', 'hdfc', 'sbi', 'icici', 'loan', 'credit'],
-        'description': 'Banking sector news and financial services'
-    }
+    {'name': 'Stock Market', 'keywords': ['stock market', 'sensex', 'nifty', 'bse', 'nse', 'share market'], 'description': 'Stock market updates and trends'},
+    {'name': 'Startup News', 'keywords': ['startup', 'funding', 'investment', 'unicorn', 'entrepreneur'], 'description': 'Startup funding and business investments'},
+    {'name': 'Economy', 'keywords': ['economy', 'gdp', 'inflation', 'rbi', 'interest rate', 'fiscal deficit'], 'description': 'Economic indicators and policies'},
+    {'name': 'Tech Companies', 'keywords': ['google', 'apple', 'amazon', 'microsoft', 'meta', 'tesla', 'nvidia'], 'description': 'Tech giant business updates'},
+    {'name': 'Banking', 'keywords': ['banking', 'bank', 'hdfc', 'sbi', 'icici', 'loan', 'credit'], 'description': 'Banking sector news'}
 ]
 
-# Technology Categories
 TECHNOLOGY_CATEGORIES = [
-    {
-        'name': 'Smartphones',
-        'keywords': ['smartphone', 'iphone', 'samsung', 'oneplus', 'redmi', 'mobile', 'android'],
-        'description': 'Mobile phones launches, reviews, and specifications'
-    },
-    {
-        'name': 'Electric Vehicles',
-        'keywords': ['electric vehicle', 'ev', 'tesla', 'bharge', 'ola electric', 'tata ev'],
-        'description': 'EV news, launches, and battery technology'
-    },
-    {
-        'name': 'Space Tech',
-        'keywords': ['space', 'isro', 'nasa', 'satellite', 'moon mission', 'mars', 'chandrayaan'],
-        'description': 'Space technology, ISRO missions, and discoveries'
-    },
-    {
-        'name': 'Gadgets',
-        'keywords': ['gadget', 'laptop', 'computer', 'smartwatch', 'earbuds', 'tablet'],
-        'description': 'Latest gadgets, electronics, and tech reviews'
-    },
-    {
-        'name': 'Internet',
-        'keywords': ['internet', '5g', 'jio', 'airtel', 'broadband', 'wifi', 'data'],
-        'description': 'Internet services, 5G, and connectivity news'
-    }
+    {'name': 'Smartphones', 'keywords': ['smartphone', 'iphone', 'samsung', 'oneplus', 'redmi', 'mobile'], 'description': 'Mobile phones and gadgets'},
+    {'name': 'Electric Vehicles', 'keywords': ['electric vehicle', 'ev', 'tesla', 'bharge', 'ola electric', 'tata ev'], 'description': 'EV news and launches'},
+    {'name': 'Space Tech', 'keywords': ['space', 'isro', 'nasa', 'satellite', 'moon mission', 'mars', 'chandrayaan'], 'description': 'Space technology and ISRO missions'},
+    {'name': 'Gadgets', 'keywords': ['gadget', 'laptop', 'computer', 'smartwatch', 'earbuds', 'tablet'], 'description': 'Latest gadgets and electronics'},
+    {'name': 'Internet', 'keywords': ['internet', '5g', 'jio', 'airtel', 'broadband', 'wifi', 'data'], 'description': 'Internet services and 5G'}
 ]
 
-# Entertainment Categories
 ENTERTAINMENT_CATEGORIES = [
-    {
-        'name': 'Bollywood',
-        'keywords': ['bollywood', 'film', 'movie', 'actor', 'actress', 'salman khan', 'shah rukh khan'],
-        'description': 'Bollywood movies, celebrities, and box office'
-    },
-    {
-        'name': 'Hollywood',
-        'keywords': ['hollywood', 'film', 'movie', 'celebrity', 'oscar', 'marvel', 'dc'],
-        'description': 'Hollywood movies, franchises, and celebrity news'
-    },
-    {
-        'name': 'South Cinema',
-        'keywords': ['tollywood', 'kollywood', 'sandalwood', 'prabhas', 'allu arjun', 'rajinikanth'],
-        'description': 'South Indian cinema - Tollywood, Kollywood, etc.'
-    },
-    {
-        'name': 'Gaming',
-        'keywords': ['gaming', 'video game', 'playstation', 'xbox', 'gta', 'pubg', 'bgmi'],
-        'description': 'Gaming news, game launches, and esports'
-    },
-    {
-        'name': 'Music',
-        'keywords': ['music', 'song', 'album', 'spotify', 'bollywood music', 'rapper'],
-        'description': 'Music releases, concerts, and industry news'
-    }
+    {'name': 'Bollywood', 'keywords': ['bollywood', 'film', 'movie', 'actor', 'actress', 'salman khan', 'shah rukh khan'], 'description': 'Bollywood movies and celebrities'},
+    {'name': 'Hollywood', 'keywords': ['hollywood', 'film', 'movie', 'celebrity', 'oscar', 'marvel', 'dc'], 'description': 'Hollywood movies and news'},
+    {'name': 'South Cinema', 'keywords': ['tollywood', 'kollywood', 'sandalwood', 'prabhas', 'allu arjun', 'rajinikanth'], 'description': 'South Indian cinema'},
+    {'name': 'Gaming', 'keywords': ['gaming', 'video game', 'playstation', 'xbox', 'gta', 'pubg', 'bgmi'], 'description': 'Gaming news and esports'},
+    {'name': 'Music', 'keywords': ['music', 'song', 'album', 'spotify', 'bollywood music'], 'description': 'Music releases and industry'}
 ]
 
-# Science & Education Categories
 SCIENCE_EDUCATION_CATEGORIES = [
-    {
-        'name': 'Science Discovery',
-        'keywords': ['science', 'discovery', 'research', 'scientist', 'study', 'invention'],
-        'description': 'Scientific discoveries and research breakthroughs'
-    },
-    {
-        'name': 'Education',
-        'keywords': ['education', 'exam', 'board exam', 'cbse', 'neet', 'jee', 'iit', 'upsc'],
-        'description': 'Education news, exam schedules, and academic updates'
-    },
-    {
-        'name': 'Health',
-        'keywords': ['health', 'disease', 'medicine', 'vaccine', 'doctor', 'hospital', 'treatment'],
-        'description': 'Health and medical news, disease outbreaks, treatments'
-    },
-    {
-        'name': 'Environment',
-        'keywords': ['climate', 'environment', 'pollution', 'global warming', 'green energy'],
-        'description': 'Environment, climate change, and sustainability news'
-    }
+    {'name': 'Science Discovery', 'keywords': ['science', 'discovery', 'research', 'scientist', 'study'], 'description': 'Scientific discoveries and research'},
+    {'name': 'Education', 'keywords': ['education', 'exam', 'board exam', 'cbse', 'neet', 'jee', 'iit', 'upsc'], 'description': 'Education news and exam updates'},
+    {'name': 'Health', 'keywords': ['health', 'disease', 'medicine', 'vaccine', 'doctor', 'hospital'], 'description': 'Health and medical news'},
+    {'name': 'Environment', 'keywords': ['climate', 'environment', 'pollution', 'global warming', 'green energy'], 'description': 'Environment and climate news'}
 ]
 
-# Global News
 GLOBAL_NEWS_CATEGORIES = [
-    {
-        'name': 'USA Politics',
-        'keywords': ['trump', 'biden', 'usa', 'america', 'white house', 'congress', 'senate'],
-        'description': 'US political news and White House updates'
-    },
-    {
-        'name': 'China News',
-        'keywords': ['china', 'chinese', 'beijing', 'xi jinping', 'taiwan', 'hong kong'],
-        'description': 'China related news and geopolitical updates'
-    },
-    {
-        'name': 'Europe News',
-        'keywords': ['europe', 'eu', 'uk', 'germany', 'france', 'russia', 'ukraine', 'war'],
-        'description': 'European news, EU decisions, and regional updates'
-    },
-    {
-        'name': 'Middle East',
-        'keywords': ['middle east', 'israel', 'palestine', 'gaza', 'iran', 'saudi', 'uae'],
-        'description': 'Middle East developments and conflicts'
-    }
+    {'name': 'USA Politics', 'keywords': ['trump', 'biden', 'usa', 'america', 'white house', 'congress'], 'description': 'US political news'},
+    {'name': 'China News', 'keywords': ['china', 'chinese', 'beijing', 'xi jinping', 'taiwan'], 'description': 'China related news'},
+    {'name': 'Europe News', 'keywords': ['europe', 'eu', 'uk', 'germany', 'france', 'russia', 'ukraine', 'war'], 'description': 'European news'},
+    {'name': 'Middle East', 'keywords': ['middle east', 'israel', 'palestine', 'gaza', 'iran', 'saudi', 'uae'], 'description': 'Middle East developments'}
 ]
 
 # ============================================================================
@@ -313,8 +116,6 @@ GLOBAL_NEWS_CATEGORIES = [
 # ============================================================================
 
 class MediaDatabase:
-    """SQLite database - Thread Safe"""
-    
     def __init__(self, db_path: str = "rjtech_media.db"):
         self.db_path = db_path
         self.local = threading.local()
@@ -329,7 +130,6 @@ class MediaDatabase:
     def _init_schema(self, conn):
         cursor = conn.cursor()
         
-        # News table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS news_collected (
                 id TEXT PRIMARY KEY,
@@ -349,7 +149,6 @@ class MediaDatabase:
             )
         """)
         
-        # Articles table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS articles (
                 id TEXT PRIMARY KEY,
@@ -366,45 +165,37 @@ class MediaDatabase:
             )
         """)
         
-        # Images table
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS images (
+            CREATE TABLE IF NOT EXISTS creative_content (
                 id TEXT PRIMARY KEY,
                 article_id TEXT,
-                filename TEXT NOT NULL,
-                filepath TEXT NOT NULL,
-                description TEXT,
-                status TEXT DEFAULT 'draft',
+                original_headline TEXT,
+                creative_caption TEXT NOT NULL,
+                hashtags TEXT,
+                image_prompt TEXT,
+                linkedin_post TEXT,
+                twitter_post TEXT,
+                facebook_post TEXT,
+                instagram_caption TEXT,
+                telegram_message TEXT,
+                status TEXT DEFAULT 'pending',
                 created_at TEXT
             )
         """)
         
-        # Videos table
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS videos (
-                id TEXT PRIMARY KEY,
-                article_id TEXT,
-                title TEXT NOT NULL,
-                script TEXT,
-                duration INTEGER,
-                status TEXT DEFAULT 'draft',
-                created_at TEXT
-            )
-        """)
-        
-        # Social posts table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS social_posts (
                 id TEXT PRIMARY KEY,
                 article_id TEXT,
+                creative_content_id TEXT,
                 content TEXT NOT NULL,
                 platform TEXT NOT NULL,
+                post_type TEXT DEFAULT 'article',
                 status TEXT DEFAULT 'pending',
                 published_time TEXT
             )
         """)
         
-        # Logs table
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS logs (
                 id TEXT PRIMARY KEY,
@@ -511,53 +302,65 @@ class MediaDatabase:
         self._get_conn().commit()
         return article_id
         
-    def save_image(self, image: Dict) -> str:
+    def save_creative_content(self, creative: Dict) -> str:
         cursor = self._get_conn().cursor()
-        image_id = str(uuid.uuid4())
+        content_id = str(uuid.uuid4())
         cursor.execute("""
-            INSERT INTO images (id, article_id, filename, filepath, description, status, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO creative_content 
+            (id, article_id, original_headline, creative_caption, hashtags, image_prompt, 
+             linkedin_post, twitter_post, facebook_post, instagram_caption, telegram_message, status, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
-            image_id,
-            image.get('article_id'),
-            image['filename'],
-            image['filepath'],
-            image.get('description', ''),
+            content_id,
+            creative.get('article_id'),
+            creative.get('original_headline', ''),
+            creative['creative_caption'],
+            creative.get('hashtags', ''),
+            creative.get('image_prompt', ''),
+            creative.get('linkedin_post', ''),
+            creative.get('twitter_post', ''),
+            creative.get('facebook_post', ''),
+            creative.get('instagram_caption', ''),
+            creative.get('telegram_message', ''),
             'pending_approval',
             datetime.now().isoformat()
         ))
         self._get_conn().commit()
-        return image_id
+        return content_id
         
-    def save_video(self, video: Dict) -> str:
+    def get_pending_creative_content(self) -> List[Dict]:
         cursor = self._get_conn().cursor()
-        video_id = str(uuid.uuid4())
-        cursor.execute("""
-            INSERT INTO videos (id, article_id, title, script, duration, status, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (
-            video_id,
-            video.get('article_id'),
-            video['title'],
-            video.get('script', ''),
-            video.get('duration', 60),
-            'pending_approval',
-            datetime.now().isoformat()
-        ))
+        rows = cursor.execute("SELECT * FROM creative_content WHERE status = 'pending_approval'").fetchall()
+        return [dict(row) for row in rows]
+        
+    def approve_creative_content(self, content_id: str):
+        cursor = self._get_conn().cursor()
+        cursor.execute("UPDATE creative_content SET status = 'approved' WHERE id = ?", (content_id,))
         self._get_conn().commit()
-        return video_id
+        
+    def reject_creative_content(self, content_id: str):
+        cursor = self._get_conn().cursor()
+        cursor.execute("UPDATE creative_content SET status = 'rejected' WHERE id = ?", (content_id,))
+        self._get_conn().commit()
+        
+    def get_approved_creative_content(self) -> List[Dict]:
+        cursor = self._get_conn().cursor()
+        rows = cursor.execute("SELECT * FROM creative_content WHERE status = 'approved' AND id NOT IN (SELECT DISTINCT creative_content_id FROM social_posts WHERE creative_content_id IS NOT NULL)").fetchall()
+        return [dict(row) for row in rows]
         
     def save_social_post(self, post: Dict) -> str:
         cursor = self._get_conn().cursor()
         post_id = str(uuid.uuid4())
         cursor.execute("""
-            INSERT INTO social_posts (id, article_id, content, platform, status, published_time)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO social_posts (id, article_id, creative_content_id, content, platform, post_type, status, published_time)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             post_id,
             post.get('article_id'),
+            post.get('creative_content_id'),
             post['content'],
             post['platform'],
+            post.get('post_type', 'article'),
             'published',
             datetime.now().isoformat()
         ))
@@ -566,23 +369,11 @@ class MediaDatabase:
         
     def get_pending_approval(self) -> Dict:
         cursor = self._get_conn().cursor()
-        
-        articles = cursor.execute("""
-            SELECT * FROM articles WHERE status = 'pending_approval'
-        """).fetchall()
-        
-        images = cursor.execute("""
-            SELECT * FROM images WHERE status = 'pending_approval'
-        """).fetchall()
-        
-        videos = cursor.execute("""
-            SELECT * FROM videos WHERE status = 'pending_approval'
-        """).fetchall()
-        
+        articles = cursor.execute("SELECT * FROM articles WHERE status = 'pending_approval'").fetchall()
+        creative_content = cursor.execute("SELECT * FROM creative_content WHERE status = 'pending_approval'").fetchall()
         return {
             'articles': [dict(a) for a in articles],
-            'images': [dict(i) for i in images],
-            'videos': [dict(v) for v in videos]
+            'creative_content': [dict(c) for c in creative_content]
         }
         
     def approve_item(self, item_type: str, item_id: str):
@@ -590,20 +381,16 @@ class MediaDatabase:
         if item_type == 'article':
             cursor.execute("UPDATE articles SET status = 'approved', approved_at = ? WHERE id = ?",
                          (datetime.now().isoformat(), item_id))
-        elif item_type == 'image':
-            cursor.execute("UPDATE images SET status = 'approved' WHERE id = ?", (item_id,))
-        elif item_type == 'video':
-            cursor.execute("UPDATE videos SET status = 'approved' WHERE id = ?", (item_id,))
+        elif item_type == 'creative':
+            cursor.execute("UPDATE creative_content SET status = 'approved' WHERE id = ?", (item_id,))
         self._get_conn().commit()
         
     def reject_item(self, item_type: str, item_id: str):
         cursor = self._get_conn().cursor()
         if item_type == 'article':
             cursor.execute("UPDATE articles SET status = 'rejected' WHERE id = ?", (item_id,))
-        elif item_type == 'image':
-            cursor.execute("UPDATE images SET status = 'rejected' WHERE id = ?", (item_id,))
-        elif item_type == 'video':
-            cursor.execute("UPDATE videos SET status = 'rejected' WHERE id = ?", (item_id,))
+        elif item_type == 'creative':
+            cursor.execute("UPDATE creative_content SET status = 'rejected' WHERE id = ?", (item_id,))
         self._get_conn().commit()
         
     def publish_article(self, article_id: str):
@@ -614,42 +401,223 @@ class MediaDatabase:
         
     def get_analytics(self) -> Dict:
         cursor = self._get_conn().cursor()
-        
         total = cursor.execute("SELECT COUNT(*) as count FROM news_collected").fetchone()[0]
         ai_news = cursor.execute("SELECT COUNT(*) as count FROM news_collected WHERE is_ai_related = TRUE").fetchone()[0]
         selected = cursor.execute("SELECT COUNT(*) as count FROM news_collected WHERE selected_by_founder = TRUE").fetchone()[0]
         articles = cursor.execute("SELECT COUNT(*) as count FROM articles").fetchone()[0]
-        published = cursor.execute("SELECT COUNT(*) as count FROM articles WHERE published_at IS NOT NULL").fetchone()[0]
-        
+        creative = cursor.execute("SELECT COUNT(*) as count FROM creative_content").fetchone()[0]
+        published = cursor.execute("SELECT COUNT(*) as count FROM social_posts").fetchone()[0]
         return {
             'total_news': total,
             'ai_news': ai_news,
             'selected': selected,
             'articles': articles,
+            'creative_content': creative,
             'published': published
         }
+
+# ============================================================================
+# AI CONTENT CREATOR - CREATES CREATIVE CONTENT!
+# ============================================================================
+
+class AIContentCreator:
+    """AI creates creative, attractive content from news!"""
+    
+    def __init__(self, db: MediaDatabase):
+        self.db = db
+        self.name = "AI Content Creator"
+        
+    def create_creative_content(self, news: Dict, article_id: str) -> Dict:
+        """AI transforms news into creative, engaging content!"""
+        
+        print("\n" + "=" * 80)
+        print("✨ AI CONTENT CREATOR - Making News AMAZING!")
+        print("=" * 80)
+        
+        category = news.get('subcategory', news.get('category', 'General'))
+        headline = news['headline']
+        
+        # AI generates creative caption
+        creative_caption = self._generate_creative_caption(headline, category, news)
+        
+        # AI generates hashtags
+        hashtags = self._generate_hashtags(category, news)
+        
+        # AI generates image prompt
+        image_prompt = self._generate_image_prompt(headline, category, news)
+        
+        # AI generates platform-specific posts
+        linkedin_post = self._generate_linkedin_post(headline, category, news, creative_caption, hashtags)
+        twitter_post = self._generate_twitter_post(headline, category, news, creative_caption, hashtags)
+        facebook_post = self._generate_facebook_post(headline, category, news, creative_caption, hashtags)
+        instagram_caption = self._generate_instagram_caption(headline, category, news, creative_caption, hashtags)
+        telegram_message = self._generate_telegram_message(headline, category, news, creative_caption, hashtags)
+        
+        creative_content = {
+            'article_id': article_id,
+            'original_headline': headline,
+            'creative_caption': creative_caption,
+            'hashtags': hashtags,
+            'image_prompt': image_prompt,
+            'linkedin_post': linkedin_post,
+            'twitter_post': twitter_post,
+            'facebook_post': facebook_post,
+            'instagram_caption': instagram_caption,
+            'telegram_message': telegram_message
+        }
+        
+        # Save to database
+        content_id = self.db.save_creative_content(creative_content)
+        
+        print(f"\n  ✅ AI created creative content for: {headline[:50]}...")
+        print(f"\n  📝 CREATIVE CAPTION:")
+        print(f"     {creative_caption[:100]}...")
+        
+        return creative_content
+        
+    def _generate_creative_caption(self, headline: str, category: str, news: Dict) -> str:
+        """AI generates catchy, engaging caption"""
+        
+        templates = [
+            "🚀 BREAKING: {headline}\n\nThis is what the future looks like! Are you ready?\n\n{category} is changing everything.",
+            "💥 JUST IN: {headline}\n\nThe {category} world will never be the same again.\n\nTag someone who needs to know this!",
+            "⚡ HOT TOPIC: {headline}\n\nEveryone's talking about this! Here's why it matters...\n\n{category} at its finest!",
+            "🔥 TRENDING: {headline}\n\nThis is exactly what we've been waiting for!\n\n{category} just got interesting!",
+            "🌟 MUST READ: {headline}\n\nHere's the deal with {category} that everyone needs to know about!\n\nShare this with your network!"
+        ]
+        
+        template = random.choice(templates)
+        caption = template.format(headline=headline, category=category)
+        
+        return caption
+        
+    def _generate_hashtags(self, category: str, news: Dict) -> str:
+        """AI generates relevant hashtags"""
+        
+        base_hashtags = {
+            'AI': ['#AI', '#ArtificialIntelligence', '#TechNews', '#FutureTech', '#MachineLearning', '#DeepLearning', '#AINews'],
+            'Cricket': ['#Cricket', '#CricketNews', '#Sports', '#IPL', '#TeamIndia', '#CricketFans'],
+            'Bollywood': ['#Bollywood', '#FilmNews', '#Movies', '#BollywoodNews', '#Entertainment'],
+            'Business': ['#Business', '#Economy', '#Finance', '#Startup', '#Investment'],
+            'Politics': ['#Politics', '#IndiaPolitics', '#News', '#PoliticalNews'],
+            'Technology': ['#Technology', '#Tech', '#Gadgets', '#Innovation', '#TechTrends'],
+            'Sports': ['#Sports', '#SportsNews', '#GameOn', '#AthleteLife'],
+            'Science': ['#Science', '#Discovery', '#Research', '#Innovation'],
+            'Health': ['#Health', '#Wellness', '#MedicalNews', '#Healthcare'],
+            'Entertainment': ['#Entertainment', '#Movies', '#Celebrity', '#PopCulture'],
+            'Education': ['#Education', '#ExamNews', '#Students', '#Learning'],
+            'Global': ['#WorldNews', '#GlobalNews', '#International', '#NewsUpdate']
+        }
+        
+        hashtag_list = base_hashtags.get(category, ['#News', '#Trending', '#MustRead', '#ShareThis'])
+        
+        return ' '.join(hashtag_list[:7])
+        
+    def _generate_image_prompt(self, headline: str, category: str, news: Dict) -> str:
+        """AI generates image creation prompt"""
+        
+        prompts = {
+            'AI': f"Futuristic AI robot brain with glowing circuits, blue and purple neon lights, cyberpunk style, dark background, high tech atmosphere, professional photography",
+            'Cricket': f"Cricket stadium with dynamic lighting, ball hitting bat, action shot, Indian flag colors, energetic atmosphere, professional sports photography",
+            'Bollywood': f"Glamorous Bollywood movie premiere, red carpet, spotlights, glamour, Indian cinema celebration, luxury style",
+            'Business': f"Modern business meeting, glass office building, success concept, charts and graphs, professional corporate atmosphere",
+            'Politics': f"Indian parliament building, democratic symbolism, national flag, government building, authoritative and professional",
+            'Technology': f"Latest smartphone or gadget, sleek design, futuristic technology, minimalist background, premium product photography",
+            'Sports': f"Athletic performance, sports stadium, victory celebration, dynamic action, energetic colors",
+            'Science': f"Laboratory with glowing experiments, scientific discovery, futuristic research facility, blue and white tones",
+            'Entertainment': f"Movie premiere red carpet, Hollywood sign, glamour, celebration, entertainment industry",
+            'Education': f"Modern classroom with students, books, graduation cap, knowledge is power concept, bright and hopeful"
+        }
+        
+        return prompts.get(category, f"Professional news illustration for: {headline}")
+        
+    def _generate_linkedin_post(self, headline: str, category: str, news: Dict, caption: str, hashtags: str) -> str:
+        """AI generates professional LinkedIn post"""
+        
+        return f"""📊 {headline}
+
+{news.get('summary', '')[:200]}...
+
+This development in {category} is significant for professionals across industries.
+
+What are your thoughts? Let's discuss in the comments.
+
+#LinkedIn #ProfessionalNetwork #Business #IndustryNews #{category}"""
+
+    def _generate_twitter_post(self, headline: str, category: str, news: Dict, caption: str, hashtags: str) -> str:
+        """AI generates Twitter/X post"""
+        
+        return f"""🔥 {headline[:100]}...
+
+{hashtags}
+
+What's your take on this? 👇"""
+
+    def _generate_facebook_post(self, headline: str, category: str, news: Dict, caption: str, hashtags: str) -> str:
+        """AI generates Facebook post"""
+        
+        return f"""📢 {headline}
+
+{news.get('summary', '')[:200]}...
+
+Share your thoughts in the comments! 👇
+
+{hashtags}
+
+#FacebookCommunity #Stay Informed"""
+
+    def _generate_instagram_caption(self, headline: str, category: str, news: Dict, caption: str, hashtags: str) -> str:
+        """AI generates attractive Instagram caption"""
+        
+        return f"""{caption}
+
+━━━━━━━━━━━━━━━
+📖 Read more in bio link!
+━━━━━━━━━━━━━━━
+
+{hashtags}
+
+━━━━━━━━━━━━━━━
+💬 Comment "NEWS" for more updates!
+━━━━━━━━━━━━━━━"""
+
+    def _generate_telegram_message(self, headline: str, category: str, news: Dict, caption: str, hashtags: str) -> str:
+        """AI generates Telegram message"""
+        
+        return f"""📱 *RJ TECH NEWS*
+
+*━━━━━━━━━━━━━━━━*
+
+{headline}
+
+*━━━━━━━━━━━━━━━━*
+
+{news.get('summary', '')[:200]}...
+
+*━━━━━━━━━━━━━━━━*
+
+{hashtags}
+
+*Powered by RJ TECH Media Engine*"""
+
 
 # ============================================================================
 # AGENT 1: RESEARCH - COLLECTS REAL NEWS
 # ============================================================================
 
 class ResearchAgent:
-    """Collects real news from all categories"""
-    
     def __init__(self, db: MediaDatabase):
         self.db = db
         self.name = "Research Agent"
         self.sources = ['BBC', 'CNN', 'NYTimes', 'Reuters', 'AP', 'Forbes', 'Bloomberg', 'The Guardian', 'Wired', 'TechCrunch']
         
     def run_cycle(self):
-        """Run research cycle - collect news from all categories"""
         print("\n" + "=" * 70)
         print("🔍 RESEARCH AGENT - Collecting REAL News")
         print("=" * 70)
         
         results = {'ai': 0, 'india_politics': 0, 'sports': 0, 'business': 0, 'tech': 0, 'entertainment': 0, 'science': 0, 'global': 0}
         
-        # 1. FIRST: Collect AI News (MOST IMPORTANT)
         print("\n🤖 AI NEWS (HIGHEST PRIORITY)")
         print("-" * 60)
         for cat in AI_NEWS_CATEGORIES:
@@ -668,9 +636,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['ai'] += 1
-            print(f"  ✓ {cat['name']}: Collected AI news")
+            print(f"  ✓ {cat['name']}")
             
-        # 2. SECOND: India Politics
         print("\n🇮🇳 INDIA POLITICS (IMPORTANT)")
         print("-" * 60)
         for cat in INDIA_POLITICS_CATEGORIES:
@@ -689,9 +656,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['india_politics'] += 1
-            print(f"  ✓ {cat['name']}: Collected India political news")
+            print(f"  ✓ {cat['name']}")
             
-        # 3. THIRD: Sports
         print("\n🏏 SPORTS NEWS")
         print("-" * 60)
         for cat in SPORTS_CATEGORIES:
@@ -710,9 +676,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['sports'] += 1
-            print(f"  ✓ {cat['name']}: Collected sports news")
+            print(f"  ✓ {cat['name']}")
             
-        # 4. FOURTH: Business
         print("\n💰 BUSINESS & FINANCE")
         print("-" * 60)
         for cat in BUSINESS_CATEGORIES:
@@ -731,9 +696,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['business'] += 1
-            print(f"  ✓ {cat['name']}: Collected business news")
+            print(f"  ✓ {cat['name']}")
             
-        # 5. FIFTH: Technology
         print("\n📱 TECHNOLOGY")
         print("-" * 60)
         for cat in TECHNOLOGY_CATEGORIES:
@@ -752,9 +716,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['tech'] += 1
-            print(f"  ✓ {cat['name']}: Collected tech news")
+            print(f"  ✓ {cat['name']}")
             
-        # 6. SIXTH: Entertainment
         print("\n🎬 ENTERTAINMENT")
         print("-" * 60)
         for cat in ENTERTAINMENT_CATEGORIES:
@@ -773,9 +736,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['entertainment'] += 1
-            print(f"  ✓ {cat['name']}: Collected entertainment news")
+            print(f"  ✓ {cat['name']}")
             
-        # 7. SEVENTH: Science & Education
         print("\n🔬 SCIENCE & EDUCATION")
         print("-" * 60)
         for cat in SCIENCE_EDUCATION_CATEGORIES:
@@ -794,9 +756,8 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['science'] += 1
-            print(f"  ✓ {cat['name']}: Collected science news")
+            print(f"  ✓ {cat['name']}")
             
-        # 8. EIGHTH: Global News
         print("\n🌍 GLOBAL NEWS")
         print("-" * 60)
         for cat in GLOBAL_NEWS_CATEGORIES:
@@ -815,18 +776,15 @@ class ResearchAgent:
                 }
                 self.db.save_news(news)
                 results['global'] += 1
-            print(f"  ✓ {cat['name']}: Collected global news")
+            print(f"  ✓ {cat['name']}")
             
         total = sum(results.values())
         self.db.log(self.name, "cycle_complete", "success", f"Total: {total} news")
         
         print(f"\n✅ TOTAL COLLECTED: {total} news items")
-        print(f"   🤖 AI: {results['ai']} | 🇮🇳 India: {results['india_politics']} | 🏏 Sports: {results['sports']}")
-        print(f"   💰 Business: {results['business']} | 📱 Tech: {results['tech']} | 🎬 Entertainment: {results['entertainment']}")
         return results
         
     def _generate_ai_headline(self, category: str, index: int) -> str:
-        """Generate realistic AI news headlines"""
         templates = {
             'Google Gemini': [
                 "Google Gemini 2.0 announces revolutionary features for AI developers",
@@ -896,7 +854,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_india_political_headline(self, category: str, index: int) -> str:
-        """Generate realistic India political news headlines"""
         templates = {
             'Central Government': [
                 "Modi government announces new economic reforms package",
@@ -966,7 +923,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_sports_headline(self, category: str, index: int) -> str:
-        """Generate realistic sports news headlines"""
         templates = {
             'Cricket': [
                 "IPL 2025 auction: Teams spend big on overseas players",
@@ -1023,7 +979,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_business_headline(self, category: str, index: int) -> str:
-        """Generate realistic business news headlines"""
         templates = {
             'Stock Market': [
                 "Sensex crosses 95,000 for first time in history",
@@ -1065,7 +1020,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_tech_headline(self, category: str, index: int) -> str:
-        """Generate realistic technology news headlines"""
         templates = {
             'Smartphones': [
                 "Samsung launches Galaxy S25 Ultra with AI features",
@@ -1107,7 +1061,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_entertainment_headline(self, category: str, index: int) -> str:
-        """Generate realistic entertainment news headlines"""
         templates = {
             'Bollywood': [
                 "Salman Khan announces 'Tiger 4' with spectacular budget",
@@ -1149,7 +1102,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_science_headline(self, category: str, index: int) -> str:
-        """Generate realistic science and education news headlines"""
         templates = {
             'Science Discovery': [
                 "Indian scientists discover new species in Western Ghats",
@@ -1184,7 +1136,6 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_global_headline(self, category: str, index: int) -> str:
-        """Generate realistic global news headlines"""
         templates = {
             'USA Politics': [
                 "Trump announces presidential campaign for 2028",
@@ -1219,11 +1170,9 @@ class ResearchAgent:
         return random.choice(templates_list)
         
     def _generate_summary(self, headline: str, category: str) -> str:
-        """Generate a summary for the news headline"""
-        return f"This is a developing story in {category}. Experts analyze the implications and impact on the industry. This news has generated significant interest and discussion among stakeholders and the general public."
+        return f"This is a developing story in {category}. Experts analyze the implications and impact. This news has generated significant interest and discussion."
         
     def _generate_full_content(self, headline: str, category: str) -> str:
-        """Generate full content for the news"""
         return f"""#{headline}
 
 ## Summary
@@ -1245,7 +1194,7 @@ This news represents an important development that could have far-reaching conse
 - For the public: Broader societal impact anticipated
 
 ## Next Steps
-Further updates will be provided as the story develops. Experts will continue to analyze the situation and provide insights.
+Further updates will be provided as the story develops.
 
 ---
 *Source: RJ TECH Media Engine*
@@ -1258,15 +1207,12 @@ Further updates will be provided as the story develops. Experts will continue to
 # ============================================================================
 
 class FounderSelectionAgent:
-    """Shows ALL News with Preview - Founder Picks"""
-    
     def __init__(self, db: MediaDatabase):
         self.db = db
         self.name = "Founder Selection Agent"
         self.selected_ids = []
         
     def show_all_news(self):
-        """Display all news for founder selection with PREVIEW"""
         news_list = self.db.get_all_news(limit=100)
         
         print("\n" + "=" * 80)
@@ -1300,7 +1246,6 @@ class FounderSelectionAgent:
         return news_list
         
     def preview_news(self, news_id: str):
-        """Show full content of a news item so founder can decide"""
         news = self.db.get_news_by_id(news_id)
         if not news:
             print(f"❌ News item not found: {news_id[:8]}...")
@@ -1327,7 +1272,6 @@ class FounderSelectionAgent:
         return news
         
     def select_news(self, news_id: str):
-        """Select news for processing"""
         self.db.select_news(news_id)
         if news_id not in self.selected_ids:
             self.selected_ids.append(news_id)
@@ -1335,31 +1279,26 @@ class FounderSelectionAgent:
         print(f"  ✓ Selected: {news['headline'][:50]}..." if news else f"  ✓ Selected: {news_id[:8]}...")
         
     def deselect_news(self, news_id: str):
-        """Deselect news"""
         self.db.deselect_news(news_id)
         if news_id in self.selected_ids:
             self.selected_ids.remove(news_id)
         print(f"  ✗ Deselected: {news_id[:8]}...")
 
 # ============================================================================
-# AGENT 3: CONTENT CREATION
+# AGENT 3: CONTENT CREATION - WITH AI CREATIVE CONTENT
 # ============================================================================
 
 class ContentAgent:
-    """Creates content from selected news"""
-    
     def __init__(self, db: MediaDatabase):
         self.db = db
         self.name = "Content Agent"
         
     def run_cycle(self):
-        """Run content creation cycle"""
         print("\n" + "=" * 70)
-        print("📝 CONTENT AGENT - Creating Articles")
+        print("📝 CONTENT AGENT - Creating Articles & AI Creative Content")
         print("=" * 70)
         
-        results = {'articles': 0}
-        
+        results = {'articles': 0, 'creative': 0}
         selected_news = self.db.get_selected_news()
         
         if not selected_news:
@@ -1367,7 +1306,11 @@ class ContentAgent:
             print("   Go back to STEP 2 and select some news items to create content.")
             return results
         
+        # Initialize AI Content Creator
+        ai_creator = AIContentCreator(self.db)
+        
         for news in selected_news:
+            # Create article
             article = {
                 'news_id': news['id'],
                 'title': f"[{news.get('subcategory', news['category'])}] {news['headline']}",
@@ -1382,23 +1325,7 @@ class ContentAgent:
 
 ---
 
-## Summary
-
-{news.get('summary', 'No summary available')}
-
----
-
-### Key Takeaways
-
-1. This news represents a significant development in {news.get('subcategory', news['category'])}
-2. Industry experts are closely monitoring the situation
-3. Further developments are expected in the coming days
-4. Stakeholders should pay attention to upcoming announcements
-
----
-
 *📱 This article was generated by RJ TECH Media Engine*
-*🤖 AI-powered content creation for your media company*
 *🏷️ Category: {news['category']} > {news.get('subcategory', 'General')}*
 """,
                 'summary': news.get('summary', '')[:200],
@@ -1406,165 +1333,169 @@ class ContentAgent:
             }
             
             article_id = self.db.save_article(article)
-            
-            image = {
-                'article_id': article_id,
-                'filename': f"image_{article_id[:8]}.png",
-                'filepath': f"media/images/image_{article_id[:8]}.png",
-                'description': f"Image for: {news['headline']}"
-            }
-            self.db.save_image(image)
-            
-            video = {
-                'article_id': article_id,
-                'title': f"{news.get('subcategory', news['category'])} News Report",
-                'script': f"""Welcome to RJ TECH News. Today we're covering: {news['headline']}.
-
-{news.get('summary', '')}
-
-This is a developing story in {news.get('subcategory', news['category'])}. 
-Our team will continue to monitor and provide updates as more information becomes available.
-
-Stay connected with RJ TECH for the latest news updates.
-
-Thank you for watching!"""
-            }
-            self.db.save_video(video)
-            
-            self.db.mark_processed(news['id'])
-            
             results['articles'] += 1
             
             print(f"  ✓ Article: {news['headline'][:50]}...")
             
-        self.db.log(self.name, "cycle_complete", "success", f"{results['articles']} articles")
-        print(f"\n✅ Created {results['articles']} articles with images and videos")
+            # NOW AI CREATES CREATIVE CONTENT!
+            print(f"\n     ✨ AI creating creative content...")
+            creative = ai_creator.create_creative_content(news, article_id)
+            results['creative'] += 1
+            
+            self.db.mark_processed(news['id'])
+            
+        self.db.log(self.name, "cycle_complete", "success", f"Articles: {results['articles']}, Creative: {results['creative']}")
+        print(f"\n✅ Created {results['articles']} articles with {results['creative']} AI creative content!")
         return results
 
 # ============================================================================
-# AGENT 4: FOUNDER APPROVAL - WITH PREVIEW
+# AGENT 4: FOUNDER APPROVAL - SHOW CREATIVE CONTENT
 # ============================================================================
 
 class ApprovalAgent:
-    """Founder approves content - WITH PREVIEW"""
-    
     def __init__(self, db: MediaDatabase):
         self.db = db
         self.name = "Approval Agent"
         
     def show_pending(self):
-        """Show pending content with preview"""
         pending = self.db.get_pending_approval()
         
         print("\n" + "=" * 70)
         print("👑 FOUNDER APPROVAL - Review Content")
         print("=" * 70)
         
-        if pending['articles']:
+        # Show creative content
+        if pending.get('creative_content'):
+            print(f"\n✨ CREATIVE CONTENT ({len(pending['creative_content'])}):")
+            print("-" * 70)
+            for i, cc in enumerate(pending['creative_content'], 1):
+                print(f"\n  [{i}] 📸 CREATIVE POST")
+                print(f"      Original: {cc['original_headline'][:50]}...")
+                print(f"      Caption: {cc['creative_caption'][:80]}...")
+                print(f"      Hashtags: {cc['hashtags'][:60]}...")
+                print(f"      Image Prompt: {cc['image_prompt'][:60]}...")
+                print(f"      ID: {cc['id'][:8]}...")
+                
+        # Show articles
+        if pending.get('articles'):
             print(f"\n📄 ARTICLES ({len(pending['articles'])}):")
             for i, art in enumerate(pending['articles'], 1):
                 print(f"  [{i}] 📝 {art['title'][:60]}...")
                 print(f"      Category: {art['category']} | ID: {art['id'][:8]}...")
                 
-        if pending['images']:
-            print(f"\n🖼️  IMAGES ({len(pending['images'])}):")
-            for i, img in enumerate(pending['images'], 1):
-                print(f"  [{i}] 🖼️ {img['filename']} - {img['description'][:40]}...")
-                print(f"      ID: {img['id'][:8]}...")
-                
-        if pending['videos']:
-            print(f"\n🎬 VIDEOS ({len(pending['videos'])}):")
-            for i, vid in enumerate(pending['videos'], 1):
-                print(f"  [{i}] 🎬 {vid['title'][:50]}...")
-                print(f"      Duration: {vid.get('duration', 60)}s | ID: {vid['id'][:8]}...")
-                
         print("\n" + "=" * 70)
         return pending
         
-    def preview_article(self, article_id: str):
-        """Show full article content for review"""
+    def preview_creative_content(self, content_id: str):
         cursor = self.db._get_conn().cursor()
-        row = cursor.execute("SELECT * FROM articles WHERE id = ?", (article_id,)).fetchone()
+        row = cursor.execute("SELECT * FROM creative_content WHERE id = ?", (content_id,)).fetchone()
         if not row:
-            print(f"❌ Article not found: {article_id[:8]}...")
+            print(f"❌ Creative content not found: {content_id[:8]}...")
             return None
             
-        article = dict(row)
+        cc = dict(row)
         
         print("\n" + "=" * 80)
-        print(f"📄 PREVIEW ARTICLE")
+        print("📸 CREATIVE CONTENT PREVIEW")
         print("=" * 80)
-        print(f"\n📌 TITLE: {article['title']}")
-        print(f"🏷️ CATEGORY: {article['category']}")
-        print(f"📅 CREATED: {article['created_at']}")
-        print(f"🔖 STATUS: {article['status']}")
-        print("\n" + "-" * 80)
-        print("📖 FULL ARTICLE CONTENT:")
+        print(f"\n📌 ORIGINAL HEADLINE: {cc['original_headline']}")
+        print(f"\n" + "-" * 80)
+        print("📝 CREATIVE CAPTION:")
         print("-" * 80)
-        print(article['content'])
+        print(cc['creative_caption'])
+        print(f"\n" + "-" * 80)
+        print("🏷️ HASHTAGS:")
+        print("-" * 80)
+        print(cc['hashtags'])
+        print(f"\n" + "-" * 80)
+        print("🖼️ IMAGE PROMPT (for AI image generation):")
+        print("-" * 80)
+        print(cc['image_prompt'])
+        print(f"\n" + "-" * 80)
+        print("📱 INSTAGRAM CAPTION:")
+        print("-" * 80)
+        print(cc['instagram_caption'])
+        print(f"\n" + "-" * 80)
+        print("💼 LINKEDIN POST:")
+        print("-" * 80)
+        print(cc['linkedin_post'])
+        print(f"\n" + "-" * 80)
+        print("🐦 TWITTER POST:")
+        print("-" * 80)
+        print(cc['twitter_post'])
         print("\n" + "=" * 80)
         
-        return article
+        return cc
         
     def approve(self, item_type: str, item_id: str):
-        """Approve item"""
         self.db.approve_item(item_type, item_id)
         print(f"  ✓ Approved: {item_type} {item_id[:8]}...")
         
     def reject(self, item_type: str, item_id: str):
-        """Reject item"""
         self.db.reject_item(item_type, item_id)
         print(f"  ✗ Rejected: {item_type} {item_id[:8]}...")
 
 # ============================================================================
-# AGENT 5: SOCIAL MEDIA
+# AGENT 5: SOCIAL MEDIA - AUTO POST ALL PLATFORMS
 # ============================================================================
 
 class SocialMediaAgent:
-    """Publishes to social media"""
-    
     def __init__(self, db: MediaDatabase):
         self.db = db
         self.name = "Social Media Agent"
         self.platforms = ['linkedin', 'x', 'facebook', 'instagram', 'telegram']
         
     def run_cycle(self):
-        """Run publishing cycle"""
         print("\n" + "=" * 70)
-        print("📱 SOCIAL MEDIA AGENT - Publishing")
+        print("📱 SOCIAL MEDIA AGENT - Publishing Creative Content")
         print("=" * 70)
         
-        cursor = self.db._get_conn().cursor()
-        articles = cursor.execute(
-            "SELECT * FROM articles WHERE status = 'approved' AND published_at IS NULL"
-        ).fetchall()
+        # Get approved creative content
+        creative_content_list = self.db.get_approved_creative_content()
         
-        if not articles:
-            print("\n⚠️ No approved articles to publish!")
-            print("   Go to STEP 4 and approve some articles first.")
+        if not creative_content_list:
+            print("\n⚠️ No approved creative content to publish!")
+            print("   Go to STEP 4 and approve some creative content first.")
             return {'published': 0}
         
-        for art in articles:
-            article = dict(art)
+        total_posts = 0
+        
+        for cc in creative_content_list:
+            print(f"\n📸 Posting creative content for: {cc['original_headline'][:50]}...")
+            
+            # Post to all platforms
             for platform in self.platforms:
+                if platform == 'linkedin':
+                    content = cc['linkedin_post']
+                elif platform == 'x':
+                    content = cc['twitter_post']
+                elif platform == 'facebook':
+                    content = cc['facebook_post']
+                elif platform == 'instagram':
+                    content = cc['instagram_caption']
+                elif platform == 'telegram':
+                    content = cc['telegram_message']
+                else:
+                    content = cc['creative_caption']
+                
                 post = {
-                    'article_id': article['id'],
-                    'content': f"📢 NEW: {article['title'][:100]}\n\n{article.get('summary', '')[:150]}...\n\n#News #{article['category']} #RJTech",
-                    'platform': platform
+                    'article_id': cc['article_id'],
+                    'creative_content_id': cc['id'],
+                    'content': content,
+                    'platform': platform,
+                    'post_type': 'creative'
                 }
                 self.db.save_social_post(post)
                 print(f"  ✓ {platform}: Posted")
+                total_posts += 1
                 
-            self.db.publish_article(article['id'])
-            
-        print(f"\n✅ Published {len(articles)} articles to {len(self.platforms)} platforms")
+        print(f"\n✅ Published {total_posts} posts to {len(self.platforms)} platforms!")
 
 # ============================================================================
-# INTERACTIVE MODE - FOUNDER COMMANDS
+# INTERACTIVE MODE
 # ============================================================================
 
 def run_interactive_mode():
-    """Run the media engine in interactive mode with founder commands"""
     engine = RJTechMediaEngine()
     engine.db = MediaDatabase()
     
@@ -1577,13 +1508,11 @@ def run_interactive_mode():
     print("\n" + "=" * 80)
     print("╔════════════════════════════════════════════════════════════════════════╗")
     print("║                                                                        ║")
-    print("║     RJ TECH MEDIA ENGINE - INTERACTIVE MODE                            ║")
+    print("║     RJ TECH MEDIA ENGINE - POWER EDITION                            ║")
     print("║                                                                        ║")
-    print("║     🤖 AI News First | 🇮🇳 India Politics | 🏏 Sports | 💰 Business   ║")
-    print("║                                                                        ║")
-    print("║     🔍 Preview before selecting!                                       ║")
-    print("║     👑 You choose what to process                                       ║")
-    print("║     ⏰ 24/7 Operation                                                   ║")
+    print("║     ✨ AI CREATES CREATIVE CONTENT FOR YOU!                         ║")
+    print("║     📸 ATTRACTIVE INSTAGRAM POSTS!                                 ║")
+    print("║     📱 AUTO-POST TO ALL PLATFORMS!                                 ║")
     print("║                                                                        ║")
     print("╚════════════════════════════════════════════════════════════════════════╝")
     print("=" * 80)
@@ -1602,11 +1531,11 @@ def run_interactive_mode():
     print("📝 AVAILABLE COMMANDS:")
     print("-" * 80)
     print("  preview <number>   - View full content of a news item (e.g., preview 1)")
-    print("  select <number>     - Select a news item (e.g., select 1)")
-    print("  deselect <number>   - Remove a selection (e.g., deselect 1)")
-    print("  list                - Show all news again")
-    print("  done                - Finish selecting and create content")
-    print("  quit                - Exit the program")
+    print("  select <number>    - Select a news item (e.g., select 1)")
+    print("  deselect <number>  - Remove a selection (e.g., deselect 1)")
+    print("  list               - Show all news again")
+    print("  done               - Finish selecting and create content")
+    print("  quit               - Exit the program")
     print("-" * 80)
     
     while True:
@@ -1682,22 +1611,22 @@ def run_interactive_mode():
             print("❓ Unknown command. Try: preview, select, deselect, list, done, quit")
     
     print("\n\n" + "=" * 80)
-    print("📝 STEP 3: CONTENT CREATION - Creating Articles")
+    print("📝 STEP 3: CONTENT CREATION - AI Creates Creative Content")
     print("=" * 80)
     content.run_cycle()
     
     print("\n\n" + "=" * 80)
-    print("👑 STEP 4: FOUNDER APPROVAL - Review & Approve Content")
+    print("👑 STEP 4: FOUNDER APPROVAL - Review & Approve Creative Content")
     print("=" * 80)
     approval.show_pending()
     
     print("\n" + "-" * 80)
     print("📝 APPROVAL COMMANDS:")
     print("-" * 80)
-    print("  preview_article <id>   - View full article content")
-    print("  approve article <id>  - Approve an article")
-    print("  reject article <id>   - Reject an article")
-    print("  done                  - Finish approving")
+    print("  preview_creative <id>   - View full creative content")
+    print("  approve creative <id>   - Approve creative content")
+    print("  reject creative <id>    - Reject creative content")
+    print("  done                   - Finish approving")
     print("-" * 80)
     
     while True:
@@ -1710,9 +1639,9 @@ def run_interactive_mode():
         parts = cmd.split()
         action = parts[0] if parts else ""
         
-        if action == "preview_article" and len(parts) >= 2:
-            article_id = parts[1]
-            approval.preview_article(article_id)
+        if action == "preview_creative" and len(parts) >= 2:
+            content_id = parts[1]
+            approval.preview_creative_content(content_id)
             
         elif action == "approve" and len(parts) >= 3:
             item_type = parts[1]
@@ -1729,7 +1658,7 @@ def run_interactive_mode():
             break
             
         else:
-            print("❓ Try: preview_article <id>, approve <type> <id>, reject <type> <id>, done")
+            print("❓ Try: preview_creative <id>, approve creative <id>, reject creative <id>, done")
     
     print("\n\n" + "=" * 80)
     print("📱 STEP 5: AUTO-PUBLISH - To All Platforms")
@@ -1744,19 +1673,18 @@ def run_interactive_mode():
     print(f"  📰 Total News: {analytics['total_news']}")
     print(f"  ✅ Selected: {analytics['selected']}")
     print(f"  📝 Articles Created: {analytics['articles']}")
-    print(f"  📢 Published: {analytics['published']}")
+    print(f"  ✨ Creative Content: {analytics['creative_content']}")
+    print(f"  📢 Published Posts: {analytics['published']}")
     print("=" * 80)
     
-    print("\n🎉 RJ TECH MEDIA ENGINE - COMPLETE!")
-    print("🤖 AI First | 👑 Founder Chooses | 📱 Auto-Publish | ⏰ 24/7")
+    print("\n🎉 RJ TECH MEDIA ENGINE - POWER EDITION COMPLETE!")
+    print("🤖 AI First | ✨ AI Creates | 📸 Instagram Posts | 📱 Auto-Publish | ⏰ 24/7")
 
 # ============================================================================
 # MAIN ENGINE
 # ============================================================================
 
 class RJTechMediaEngine:
-    """Main Media Engine"""
-    
     def __init__(self):
         self.name = "RJ TECH Media Engine"
         self.db = MediaDatabase()
@@ -1764,17 +1692,15 @@ class RJTechMediaEngine:
         self.start_time = None
         
     def run(self):
-        """Run the complete system in automated mode"""
         print("\n" + "=" * 70)
         print("╔════════════════════════════════════════════════════════════╗")
         print("║                                                            ║")
-        print("║     RJ TECH MEDIA ENGINE                                   ║")
-        print("║     ALL News | Founder Chooses | Auto-Publish             ║")
+        print("║     RJ TECH MEDIA ENGINE - POWER EDITION                 ║")
+        print("║     ALL News | AI Creates | Auto-Publish               ║")
         print("║                                                            ║")
-        print("║     🤖 AI News First                                      ║")
-        print("║     📰 All News Second                                   ║")
-        print("║     👑 Founder Picks                                      ║")
-        print("║     ⏰ 24/7 Operation                                      ║")
+        print("║     ✨ AI Creates Creative Content                     ║")
+        print("║     📸 Generates Instagram Posts                       ║")
+        print("║     📱 Auto-Post to All Platforms                     ║")
         print("║                                                            ║")
         print("╚════════════════════════════════════════════════════════════╝")
         print("=" * 70)
@@ -1792,7 +1718,7 @@ class RJTechMediaEngine:
         print("STEP 2: FOUNDER SELECTION - Choose News to Process")
         print("=" * 70)
         selection = FounderSelectionAgent(self.db)
-        news_list = selection.show_all_news()
+        selection.show_all_news()
         
         print("\n📝 FOUNDER SELECTION OPTIONS:")
         print("   Type: select <number> to choose news")
@@ -1800,7 +1726,7 @@ class RJTechMediaEngine:
         print("   Type: done when finished selecting")
         
         print("\n" + "=" * 70)
-        print("STEP 3: CONTENT CREATION - Creating Articles")
+        print("STEP 3: CONTENT CREATION - AI Creates Creative Content")
         print("=" * 70)
         content = ContentAgent(self.db)
         content.run_cycle()
@@ -1812,8 +1738,8 @@ class RJTechMediaEngine:
         approval.show_pending()
         
         print("\n📝 APPROVAL OPTIONS:")
-        print("   Type: approve <type> <id> to approve")
-        print("   Type: reject <type> <id> to reject")
+        print("   Type: approve creative <id> to approve")
+        print("   Type: reject creative <id> to reject")
         print("   Type: done when finished reviewing")
         
         print("\n" + "=" * 70)
@@ -1825,12 +1751,11 @@ class RJTechMediaEngine:
         self.show_dashboard()
         
         print("\n" + "=" * 70)
-        print("         RJ TECH MEDIA ENGINE - COMPLETE")
-        print("         AI First | Founder Chooses | Auto-Publish | 24/7")
+        print("         RJ TECH MEDIA ENGINE - POWER EDITION COMPLETE")
+        print("         AI First | AI Creates | Instagram Posts | Auto-Publish")
         print("=" * 70)
         
     def show_dashboard(self):
-        """Show system dashboard"""
         analytics = self.db.get_analytics()
         
         print("\n" + "=" * 70)
@@ -1843,11 +1768,11 @@ class RJTechMediaEngine:
         print(f"  AI News: {analytics['ai_news']}")
         print(f"  Selected: {analytics['selected']}")
         print(f"  Articles: {analytics['articles']}")
+        print(f"  Creative Content: {analytics['creative_content']}")
         print(f"  Published: {analytics['published']}")
         print("=" * 70)
 
 def main():
-    """Main entry point"""
     import sys
     
     if len(sys.argv) > 1 and sys.argv[1] == "--interactive":
